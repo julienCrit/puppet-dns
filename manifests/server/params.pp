@@ -20,6 +20,8 @@ class dns::server::params {
       $default_dnssec_validation = 'auto'
       if versioncmp( $::operatingsystemmajrelease, '8' ) >= 0 {
         $necessary_packages = ['bind9']
+      } elsif ( $::operatingsystem == 'Ubuntu' and $::operatingsystemmajrelease >= 17 ) {
+        $necessary_packages = ['bind9']
       } else {
         $necessary_packages = [ 'bind9', 'dnssec-tools' ]
       }
