@@ -211,7 +211,7 @@ define dns::zone (
   }
 
   validate_string($zone_type)
-  $valid_zone_type_array = ['master', 'slave', 'stub', 'forward', 'delegation-only']
+  $valid_zone_type_array = ['master', 'slave', 'stub', 'forward', 'delegation-only', 'manual']
   if !member($valid_zone_type_array, $zone_type) {
     $valid_zone_type_array_str = join($valid_zone_type_array, ',')
     fail("The zone_type must be one of [${valid_zone_type_array}]")
