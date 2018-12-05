@@ -1,5 +1,9 @@
 zone "<%= @zone %>" {
+<% if (@zone_type == 'manual') -%>
+    type master;
+<% else -%>
     type <%= @zone_type %>;
+<% end -%>
 <% if @zone_notify -%>
     notify <%= @zone_notify %>;
 <% end -%>
