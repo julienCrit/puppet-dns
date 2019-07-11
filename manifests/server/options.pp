@@ -12,6 +12,10 @@
 #   Array of IP addresses which are allowed to ask ordinary DNS questions.
 #   Default: empty, meaning "any"
 #
+# [*allow_query_cache*]
+#   Array of IP addresses which are allowed to ask cached DNS questions.
+#   Default: empty, meaning forbidden
+#
 # [*also_notify*]
 #   The list of servers to which additional zone-change notifications
 #   should be sent.
@@ -157,6 +161,7 @@
 include dns::server::params
 define dns::server::options (
   $allow_query = [],
+  $allow_query_cache = [],
   $allow_recursion = [],
   $also_notify = [],
   $check_names_master = undef,
@@ -214,6 +219,7 @@ define dns::server::options (
     fail("The check name policy check_names_response must be ${valid_check_names}")
   }
   validate_array($allow_query)
+  validate_array($allow_query_cache)
 
   if $statistic_channel_port != undef and !is_numeric($statistic_channel_port) {
     fail('The statistic_channel_port is not a number')
